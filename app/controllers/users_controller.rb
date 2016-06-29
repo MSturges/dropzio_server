@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(userName: params[:userName], password_digest: params[:password_digest], lat: params[:lat], long: params[:long])
+    user = User.new(user_params)
     # if the user is saved successfully than respond with json data and status code 201
     if user.save
       render json: user, status: 201
@@ -15,6 +15,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    user = User.find_by(id: params[:id])
+    if user.update(params.require(:user).permit(:lat, :long))
+      render json: user, status: 201
+    else
+      render json: { errors: user.errors}, status: 422
+    end
+  end
 
+  def destroy
+    user = User.find_by(id: params[:id])
+    user.destroy
+  end
+
+  # $http.post('/users', {user: userObj})
+  # $http.patch('/users', {user: latLng})
+  private def user_params
+    params.require(:user).permit(:userName, :password, :lat, :long)
+  end
 
 end
