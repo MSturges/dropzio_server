@@ -78,8 +78,8 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: dropzio_server_production
-  username: dropzio_server
-  password: <%= ENV['DROPZIO_SERVER_DATABASE_PASSWORD'] %>
+# production:
+#   <<: *default
+#   database: dropzio_server_production
+#   username: dropzio_server
+#   password: <%= ENV['DATABASE_PASSWORD'] %>
