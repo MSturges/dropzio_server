@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   # $http.post('/users', {user: userObj})
   # $http.patch('/users', {user: latLng})
   private def user_params
-    params.require(:user).permit(:userName, :password, :lat, :long)
+    params.require(:user).permit(:userName, :password)
   end
 
 end
