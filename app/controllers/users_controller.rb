@@ -4,14 +4,10 @@ def index
   render json: User.all
 end
 
-
-
-
 def show
   user = User.find_by(id: params[:id])
   render :json => {id: user.id, userName: user.userName}
 end
-
 
 
 def create
@@ -22,10 +18,6 @@ def create
     render json: { errors: user.errors}, status: 422
   end
 end
-
-
-
-
 
 def update
   user = User.find_by(id: params[:id])
