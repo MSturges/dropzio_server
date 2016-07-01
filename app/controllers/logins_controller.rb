@@ -1,32 +1,33 @@
 class LoginsController < ApplicationController
 
-  def new
+  include BCrypt
+  skip_before_filter  :verify_authenticity_token
 
-  end
+  def signin
 
-  def create
+    user = User.find_by(userName: params[:user][:userName])
+    @password ||= Password.new(password_hash)
+    # puts user.password == params[:user][:password]
+    puts @password
+    puts params[:user][:password]
 
-    user = User.find_by(userName: params[:userName])
-
-    p user
-
-    if user && user.authenticate(params[:password])
-      # session[:user_id] = user.id
-      render :json => {id: user.id, userName: user.userName}
-
+    if @password == params[:user][:password]
+      puts user
+      render :json => {id: user.id, name: user.userName}
     else
-      render json: { errors: user.errors}, status: 422
+      render status: 400, :json => {error: "Name or password is incorrect"}
     end
-
-  end
-
-
-
-  def destroy
-
-    session[:user_id] = nil
-    render json => {balls: balls}
-
   end
 
 end
+
+
+# def signin
+#   user = User.find_by(name: params[:name])
+#   if user.password == params[:password]
+#     jwt = JsonWebToken.sign({id: user.id}, key: ENV['SECRET'])
+#     render :json => {id: user.id, name: user.name, jwt: jwt}
+#   else
+#     render status: 400, :json => {error: "Name or password is incorrect"}
+#   end
+# end
