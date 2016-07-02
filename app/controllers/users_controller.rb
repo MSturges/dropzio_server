@@ -1,43 +1,51 @@
 class UsersController < ApplicationController
 
-def index
-  render json: User.all
-end
+  before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
-def show
-  user = User.find_by(id: params[:id])
-  render :json => {id: user.id, userName: user.userName}
-end
 
-def create
-  user = User.new(user_params)
-
-  if user.save
-    render json: user, status: 201
-  else
-    render json: { errors: user.errors}, status: 422
+  def index
+    render json: User.all
   end
-end
 
-def update
-  user = User.find_by(id: params[:id])
-  if user.update(params.require(:user).permit(:lat, :long))
-    render json: user, status: 201
-  else
-    render json: { errors: user.errors}, status: 422
+  def show
+    user = User.find_by(id: params[:id])
+    render :json => {id: user.id, userName: user.userName}
   end
-end
 
-def destroy
-  user = User.find_by(id: params[:id])
-  user.destroy
-end
+  def create
+    user = User.new(user_params)
 
-# $http.post('/users', {user: userObj} )
-# $http.patch('/users', {user: latLng})
+    if user.save
+      render json: user, status: 201
+    else
+      render json: { errors: user.errors}, status: 422
+    end
+  end
 
-private def user_params
-  params.require(:user).permit(:userName, :password, :lat, :long)
-end
+  def update
+    user = User.find_by(id: params[:id])
+    if user.update(params.require(:user).permit(:lat, :long))
+      render json: user, status: 201
+    else
+      render json: { errors: user.errors}, status: 422
+    end
+  end
+
+  def destroy
+    user = User.find_by(id: params[:id])
+    user.destroy
+  end
+
+  # $http.post('/users', {user: userObj} )
+  # $http.patch('/users', {user: latLng})
+
+  private def user_params
+    params.require(:user).permit(:userName, :password, :lat, :long)
+  end
+
+  private def set_s3_direct_post
+    @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+  end
+  
 
 end

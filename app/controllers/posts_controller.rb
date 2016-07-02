@@ -9,6 +9,12 @@ class PostsController < ApplicationController
     end
   end
 
+def getposts
+  post = Post.all
+  render json: {post: post}
+end
+
+
   private def posts_params
     params.require(:post).permit(:lat, :long, :imgURL, :title, :content, :score, :follow, :user_id)
   end
