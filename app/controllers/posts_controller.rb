@@ -14,6 +14,15 @@ def getposts
   render json: {post: post}
 end
 
+def score
+  post = Post.find_by(id: params[:id])
+
+
+
+end
+
+
+
 
   private def posts_params
     params.require(:post).permit(:lat, :long, :imgURL, :title, :content, :score, :follow, :user_id)

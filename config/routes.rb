@@ -6,4 +6,7 @@ Rails.application.routes.draw do
 
   post '/login', to: "logins#login"
   get '/postlist', to: "posts#getposts"
+
+  post '/postscore', to: "posts#score"
+
 end
