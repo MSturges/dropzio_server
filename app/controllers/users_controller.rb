@@ -14,7 +14,6 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
-
     if user.save
       render json: user, status: 201
     else
@@ -43,9 +42,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:userName, :password, :lat, :long)
   end
 
-  private def set_s3_direct_post
-    @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
-  end
-  
+
+
 
 end
