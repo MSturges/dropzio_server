@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
 
-  # def index
-  #   render json: User.all
-  # end
+  def index
+    render json: User.all
+  end
 
-  # def show
-  #   user = User.find_by(id: params[:id])
-  #   render :json => {id: user.id, userName: user.userName}
-  # end
+  def show
+    user = User.find_by(id: params[:id])
+    render :json => {id: user.id, userName: user.userName}
+  end
 
   def create
     user = User.new(user_params)
@@ -27,10 +27,10 @@ class UsersController < ApplicationController
     end
   end
 
-  # def destroy
-  #   user = User.find_by(id: params[:id])
-  #   user.destroy
-  # end
+  def destroy
+    user = User.find_by(id: params[:id])
+    user.destroy
+  end
 
   # $http.post('/users', {user: userObj} )
   # $http.patch('/users', {user: latLng})
