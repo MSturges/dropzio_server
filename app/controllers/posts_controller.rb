@@ -18,11 +18,11 @@ class PostsController < ApplicationController
     user = User.find_by(id: params[:id])
     post = Post.in_range(:all, :origin => [user.lat, user.long], :within=> 0.1 ).order('id')
 
+    if post
       render json: {post: post}
-    # if post
-    # else
-    #   render json: user, status: 201
-    # end
+    else
+      render json: {post: "No posts within range!"}
+    end
   end
 
 
