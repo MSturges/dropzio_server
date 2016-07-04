@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   resources :uploads
 
   post '/login', to: "logins#login"
+  
   get '/postlist', to: "posts#getposts"
 
   post '/changescore', to: "posts#changescore"
 
-  get '/geofilteredposts/:id', to: "posts#geoFilteredPosts"
+  get '/geofilteredPosts/:id', to: "posts#geoFilteredPosts"
 
 end

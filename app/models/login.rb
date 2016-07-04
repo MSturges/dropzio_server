@@ -1,4 +1,5 @@
 class Login < ActiveRecord::Base
+
   include BCrypt
 
   def password
@@ -9,4 +10,6 @@ class Login < ActiveRecord::Base
     password = Password.create(new_password)
     self.password_hash = password
   end
+
+
 end
