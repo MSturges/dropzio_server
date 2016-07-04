@@ -14,6 +14,15 @@ class PostsController < ApplicationController
     render json: {post: post}
   end
 
+  def geoFilteredPosts
+    user = User.find_by(id: params[:id])
+
+    # post = Post.find(:all, :origin => [user.lat, user.long], :within=>1)
+
+    render json: {user: user}
+
+  end
+
 
   def changescore
     post = Post.find_by(id: params[:post][:postId])
