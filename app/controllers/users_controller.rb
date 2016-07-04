@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_filter :verify_authenticity_token, :only => [:update]
+  skip_before_filter :verify_authenticity_token, :only => [:update, :get]
 
   def index
     render json: User.all

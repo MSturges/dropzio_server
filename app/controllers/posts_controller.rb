@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  skip_before_filter :verify_authenticity_token, :only => [:update, :get]
+
   def create
     post = Post.new(posts_params)
     if post.save
