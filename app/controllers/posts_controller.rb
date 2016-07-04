@@ -16,13 +16,8 @@ class PostsController < ApplicationController
 
   def geoFilteredPosts
     user = User.find_by(id: params[:id])
-
-    post = Post.in_range(:all, :origin => [user.lat, user.long], :within=>1)
-
-
-
+    post = Post.in_range(:all, :origin => [user.lat, user.long], :within=>1).order('id')
     render json: {post: post}
-
   end
 
 
