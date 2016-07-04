@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
 
-  def put
+  def update
     user = User.find_by(id: params[:id])
     if user.update(params.require(:user).permit(:lat, :long))
       render json: user, status: 201
