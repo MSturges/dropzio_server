@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   skip_before_filter :verify_authenticity_token, :only => [:update]
-  
+
   def index
     render json: User.all
   end
@@ -20,7 +20,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def update
+# changed put to patch
+  def patch
     user = User.find_by(id: params[:id])
     if user.update(params.require(:user).permit(:lat, :long))
       render json: user, status: 201
