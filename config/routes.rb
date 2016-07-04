@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  match '*any' => 'application#options', :via [:options]
+  match '*any' => 'application#options', :via => [:options]
 
   resources :users
   resources :posts
