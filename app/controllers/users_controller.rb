@@ -20,8 +20,8 @@ class UsersController < ApplicationController
     end
   end
 
-# changed put to patch
-  def patch
+
+  def put
     user = User.find_by(id: params[:id])
     if user.update(params.require(:user).permit(:lat, :long))
       render json: user, status: 201
