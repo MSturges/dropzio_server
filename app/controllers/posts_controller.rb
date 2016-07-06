@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  skip_before_filter :verify_authenticity_token, :only => [:update, :get]
+  skip_before_filter :verify_authenticity_token, :only => [:update, :get, :post]
 
   def create
     post = Post.new(posts_params)
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
 
     posistion = params.require(:compass).permit(:lat, :long)
 
-    posts = Post.in_range(:all, :origin => [params[:compass][:lat], params[:compass][:long]], :within = 10.0 ).order('id')
+    posts = Post.in_range(:all, :origin => [params[:compass][:lat], params[:compass][:long]], :within = 10.0 )
 
 
     render json: {posts: posts}
