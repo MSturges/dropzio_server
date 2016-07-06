@@ -27,6 +27,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def compass
+
+    posts = Post.in_range(:all, :origin => [params[:lat], params[:long]], :beyond = 0.015, :within=> 0.5).order('id')
+
+    if posts
+      render json: {posts: posts}
+    else
+      render json: {post: "No posts within .5 miles"}
+    end
+  end
+
+
 
   def changescore
     post = Post.find_by(id: params[:post][:postId])

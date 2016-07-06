@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   post '/changescore', to: "posts#changescore"
 
   get '/geofilteredposts/:id', to: "posts#geoFilteredPosts"
-
-
+  
+  post '/compass', to: "posts#compass"
 
 
 
