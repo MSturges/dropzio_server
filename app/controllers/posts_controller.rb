@@ -27,15 +27,18 @@ class PostsController < ApplicationController
     end
   end
 
-
   def compass
     pos = params.require(:compass).permit(:lat, :long)
+
+    p pos
+
     posts = Post.in_range(:all, :origin => [pos[:lat], pos[:long]], :within=> 10.0)
+
+
+    p posts
+    
     render json: {posts: posts}
   end
-
-
-
 
   def changescore
     post = Post.find_by(id: params[:post][:postId])
