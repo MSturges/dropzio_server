@@ -30,13 +30,19 @@ class PostsController < ApplicationController
   def compass
 
     posistion = params.require(:compass).permit(:lat, :long)
+
     posts = Post.in_range(:all, :origin => [posistion.lat, posistion.long], :beyond = 0.015, :within=> 0.5).order('id')
 
-    if posts
-      render json: {posts: posts}
-    else
-      render json: {post: "No posts within .5 miles"}
-    end
+
+    render json: {posts: posts}
+
+    
+    # if posts
+    #   render json: {posts: posts}
+    # else
+    #   render json: {post: "No posts within .5 miles"}
+    #
+    # end
   end
 
 
