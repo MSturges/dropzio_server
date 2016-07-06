@@ -29,11 +29,11 @@ class PostsController < ApplicationController
 
   def compass
 
-    params.require(:compass).permit(:lat, :long)
+    pos = params.require(:compass).permit(:lat, :long)
 
 
 
-    posts = Post.in_range(:all, :origin => [params[:lat] , params[:lat]  ], :within=> 10.0)
+    posts = Post.in_range(:all, :origin => [pos.lat, pos.long], :within=> 10.0)
 
 
     render json: {posts: posts}
