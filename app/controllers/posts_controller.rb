@@ -29,7 +29,7 @@ class PostsController < ApplicationController
 
   def compass
 
-    posistion = params.require(:post).permit(:lat, :long)
+    posistion = params.require(:compass).permit(:lat, :long)
     posts = Post.in_range(:all, :origin => [posistion.lat, posistion.long], :beyond = 0.015, :within=> 0.5).order('id')
 
     if posts
