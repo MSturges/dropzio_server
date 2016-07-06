@@ -34,10 +34,14 @@ class PostsController < ApplicationController
 
     posts = Post.in_range(:all, :origin => [pos[:lat], pos[:long]], :within=> 10.0)
 
-    render json: {posts: posts}
 
-
+    if post
+      render json: {posts: posts}
+    else
+      render status: 200, :json => {error: "No Posts Within Range"}
+    end
   end
+
 
 
 
