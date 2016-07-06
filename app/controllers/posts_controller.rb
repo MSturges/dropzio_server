@@ -29,7 +29,9 @@ class PostsController < ApplicationController
 
   def compass
 
-    posts = Post.in_range(:all, :origin => [params[:lat], params[:long]], :beyond = 0.015, :within=> 0.5).order('id')
+    posistion = request.request_parameters.slice(:lat, :long)
+
+    posts = Post.in_range(:all, :origin => [posistion.lat, posistion.long], :beyond = 0.015, :within=> 0.5).order('id')
 
     if posts
       render json: {posts: posts}
