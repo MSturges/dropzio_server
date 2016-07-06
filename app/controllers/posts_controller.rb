@@ -28,21 +28,6 @@ class PostsController < ApplicationController
   end
 
 
-  def compass
-
-    post = Post.in_range(:all, :origin => [params[:lat], params[:long]], :beyond = 0.015, :within=> 0.5).order('id')
-
-    if post
-      render json: {post: post}
-    else
-      render json: {post: "No posts within .5 miles"}
-    end
-  end
-
-
-
-
-
   def changescore
     post = Post.find_by(id: params[:post][:postId])
     post.score += params[:post][:score]
@@ -54,13 +39,4 @@ class PostsController < ApplicationController
   private def posts_params
     params.require(:post).permit(:lat, :long, :imgURL, :title, :content, :score, :follow, :user_id )
   end
-
 end
-
-
-
-# if post.update(params.require(:post).permit(:score))
-#   render json: post, status: 201
-# else
-#   render json: { errors: post.errors}, status: 422
-# end

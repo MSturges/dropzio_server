@@ -9,4 +9,5 @@ class LoginsController < ApplicationController
       render status: 200, :json => {error: "Name or password is incorrect"}
     end
   end
+  
 end
