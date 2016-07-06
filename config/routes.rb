@@ -14,4 +14,8 @@ Rails.application.routes.draw do
 
   get '/geofilteredposts/:id', to: "posts#geoFilteredPosts"
 
+  post '/compass/:id', to: "posts#compass"
+
+
+
 end
