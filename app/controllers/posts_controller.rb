@@ -18,7 +18,7 @@ class PostsController < ApplicationController
 
   def geoFilteredPosts
     user = User.find_by(id: params[:id])
-    post = Post.in_range(:all, :origin => [user.lat, user.long], :within=> 0.02).order('id')
+    post = Post.in_range(:all, :origin => [user.lat, user.long], :within=> 0.018).order('id')
 
     if post
       render json: {post: post}
@@ -29,7 +29,7 @@ class PostsController < ApplicationController
 
   def compass
     pos = params.require(:compass).permit(:lat, :long)
-    posts = Post.in_range(:all, :origin => [pos[:lat], pos[:long]], :within=> 1.0, :beyond=> 0.02)
+    posts = Post.in_range(:all, :origin => [pos[:lat], pos[:long]], :within=> 1.0, :beyond=> 0.018)
     render json: {posts: posts}
   end
 
